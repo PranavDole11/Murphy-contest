@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Trailer Landing Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: #333;
+      color: white;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 1000px; /* Increased max width */
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .poster {
+      margin: 20px 0;
+    }
+
+    .poster img {
+      width: 100%;
+      max-width: 450px; /* Stretches more horizontally */
+      height: auto;
+      border-radius: 10px;
+    }
+
+    iframe {
+      width: 100%;
+      max-width: 900px; /* Stretch the trailer more horizontally */
+      height: 500px;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .quiz {
+      margin-top: 30px;
+      display: none; /* Initially hidden */
+    }
+
+    .promo-text {
+      font-size: 22px;
+      color: #f39c12;
+      margin-bottom: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        max-width: 90%; /* Ensures it fits on smaller screens */
+      }
+
+      .poster img {
+        max-width: 100%; /* Responsive poster size for mobile */
+      }
+
+      iframe {
+        height: 250px; /* Reduce height for mobile */
+      }
+
+      h1 {
+        font-size: 20px; /* Adjust heading size for mobile */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Promotional text -->
+    <h1>Watch the Murphy trailer, fill the form, and stand a chance to win a TV!</h1>
+
+    <!-- Poster placeholder -->
+    <div class="poster">
+      <img src="C:\Users\prana\OneDrive\Documents\Murphy QR\Copy of Murphy_6Sheet_02_K.jpg" width="640" height="1200" alt="Movie Poster">
+    </div>
+
+    <!-- Trailer placeholder -->
+    <div id="player"></div> <!-- YouTube player will load here -->
+    
+    <!-- Google Form Embed (Quiz) -->
+    <div class="quiz" id="quizSection">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeIrDkaF0Vzmzbza3Q7qW8V2eUgYkGdHJ8f296MSYtUx42WxQ/viewform?embedded=true" width="640" height="1200" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    </div>
+  </div>
+
+  <!-- Load the YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+  <script>
+    var player;
+
+    // This function creates an <iframe> (and YouTube player) after the API code downloads.
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('player', {
+        height: '500', // Increased height
+        width: '900',  // Increased width
+        videoId: 'LRUodmjNBig', // Replace this with your video ID
+        events: {
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
+
+    // This function is called when the video player's state changes.
+    function onPlayerStateChange(event) {
+      if (event.data == YT.PlayerState.ENDED) {
+        // Show the quiz form when the video ends
+        document.getElementById('quizSection').style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
